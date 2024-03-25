@@ -5,7 +5,7 @@
 #include "include/SDL2/SDL_ttf.h"
 #include "include/SDL2/SDL_net.h"
 #include "Screen.hpp"
-#include "Render.hpp"
+
 
 int main(int argc, char* argv[]){
     if (SDL_Init(SDL_INIT_VIDEO) < 0){
