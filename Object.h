@@ -1,45 +1,24 @@
-// #pragma once
-// #include "include/SDL2/SDL.h"
-// #include "include/SDL2/SDL_image.h"
-
-// class Screen{
-// public:
-//     //title
-//     const char * title = "SDL2-Template";
-
-//     //resolution
-//     int width = 1280;
-//     int height = 720;
-
-//     //position
-//     int x = SDL_WINDOWPOS_CENTERED;
-//     int y = SDL_WINDOWPOS_CENTERED;
-
-//     //window flags
-//     Uint32 fixedsize = 0;
-//     Uint32 resizable = SDL_WINDOW_RESIZABLE;
-
-//     //other properties
-//     bool isFullscreen = false;
-//     bool isMaximized = false;
-//     bool isResizable = false;
-
-//     SDL_Window * window = NULL;
-
-//     //method
-//     Screen();
-//     void CleanUp();
-// };
-
-
 
 #pragma once
 #include <SDL.h>
 
-
 class object {
 private:
+    SDL_Rect src, dest;
     SDL_Texture* texture;
+    double scale = 0.1;
+    
 public:
+    void setlength();
     void init(const char* path);
+    void update(int x = 0, int y = 0);
+    void render();
+    void setsrc(SDL_Rect sr);
+    void setdest(SDL_Rect des);
+    void setTex(const char* path);
+    void setscale(double sca);
+    void setpos(int x, int y);
+    SDL_Rect getsrc();
+    SDL_Rect getdest();
+    double getscale();
 };

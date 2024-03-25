@@ -9,6 +9,8 @@ private:
 
     static SDL_Renderer* renderer;
     static SDL_Event event;
+    static int Width;
+    static int Height;
     static bool isRunning;
 
     // Game();

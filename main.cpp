@@ -10,7 +10,7 @@ int main(int argc, char* argv[]){
     /*game init*/
     game->init();
     /*FPS time*/
-    int FPS = 60;
+    int FPS = 200;
     int BaseTime = 1000 / FPS;
     int FramesTime;
     int FPSstart;

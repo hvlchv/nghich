@@ -16,6 +16,19 @@ SDL_Texture* textureManager::LoadImage(const char* file) {
     return tex;
 }
 
+SDL_Texture* textureManager::LoadImage(const char* file, SDL_Rect &src) {
+    SDL_Surface* surface;
+    surface = IMG_Load(file);
+    src = {0, 0, surface->w, surface->h};
+
+    SDL_Texture* tex = nullptr;
+    tex = SDL_CreateTextureFromSurface(Game::renderer, surface);
+    
+    SDL_FreeSurface(surface);
+
+    return tex;
+}
+
 
 void textureManager::DrawImage(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest)
 {
