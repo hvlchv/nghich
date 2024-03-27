@@ -1,17 +1,23 @@
 #include "player.h"
 #include "game.h"
 
-void Player::input() {
+void Player::update() {
     
     if(Game::event.type == SDL_KEYDOWN)
     {
         switch(Game::event.key.keysym.sym )
         {
             case SDLK_a:
-            vx = -5;
+            {
+                Left = 1;
+                Right = 0;
+            }
             break;
             case SDLK_d:
-            vx = 5;
+            {
+                Left = 0;
+                Right = 1;
+            }
             break;
         }
     }
@@ -20,12 +26,20 @@ void Player::input() {
         switch(Game::event.key.keysym.sym )
         {
             case SDLK_a:
-            vx = 0;
+            Left = 0;
             break;
             case SDLK_d:
-            vx = 0;
+            Right = 0;
             break;
         }
     }
-    update(vx,vy);
+    if(Left)vx = -3;
+    else if(Right)vx = 3;
+    else vx = 0;
+    move(vx,vy);
+}
+
+void Player::render()
+{
+    draw();
 }

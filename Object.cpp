@@ -1,67 +1,70 @@
-#include "Object.h"
+#include "object.h"
 #include "TextureManager.h"
-#include <iostream>
+#include <bits/stdc++.h>
 #include "game.h"
 
-void object::setlength() {
+void Object::setlength() {
     
 }
 
-void object::init(const char* path) {
+void Object::init(const char* path) {
     setTex(path);
     setpos(0,0);
 
 }
 
-void object::update(int x, int y) {
-    // if(Game::event.type == SDL_KEYDOWN)
-    // {
-    //     switch(Game::event.key.keysym.sym )
-    //     {
-    //         case SDLK_a:
-    //         dest.x -= 5;
-    //         break;
-    //         case SDLK_d:
-    //         dest.x += 5;
-    //         break;
-    //     }
-    // }
+void Object::move(int x,int y)
+{
     dest.x += x;
     dest.y += y;
-    if(dest.x + dest.w > Game::Width) dest.x = Game::Width - dest.w;
+    if(dest.x + dest.w > Game::game_width) dest.x = Game::game_width - dest.w;
     if(dest.x < 0) dest.x = 0;
-    dest.w = src.w * scale;
-    dest.h = src.h * scale;
 }
-void object::render() {
+
+
+void Object::draw() {
+
+    SDL_Rect Dest = {dest.x, dest.y, int(dest.w * scale), int(dest.h * scale)};
     textureManager::DrawImage(texture,src,dest);
 }
-void object::setsrc(SDL_Rect sr) {
+void Object::setsrc(SDL_Rect sr) {
     src = sr;
 }
-void object::setdest(SDL_Rect des) {
+void Object::setdest(SDL_Rect des) {
     dest = des;
 }
-void object::setTex(const char* path) {
+void Object::setTex(const char* path) {
     texture = textureManager::LoadImage(path, src);
+    dest = src;
     
-    dest.w = src.w * scale;
-    dest.h = src.w * scale;
-    std::cout << dest.x << ' ' << dest.y;
 }
-void object::setscale(double sca) {
+void Object::setscale(double sca) {
     scale = sca;
+    
 }
-void object::setpos(int x, int y) {
+void Object::setwidth(int w)
+{
+    dest.w = w;
+}
+void Object::setpos(int x, int y) {
     dest.x = x;
     dest.y = y;
 }
-SDL_Rect object::getsrc() {
+SDL_Rect Object::getsrc() {
     return src;
 }
-SDL_Rect object::getdest() {
+SDL_Rect Object::getdest() {
     return dest;
 }
-double object::getscale() {
+double Object::getscale() {
     return scale;
+}
+
+bool Object:: collision(SDL_Rect A )
+{
+    SDL_Rect B = dest;
+    return !(   A.x > B.x + B.w||
+                A.y > B.y + B.h||
+                B.x > A.x + A.w||
+                B.y > A.y + A.h);
 }
