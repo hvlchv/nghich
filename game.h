@@ -15,6 +15,7 @@ private:
     static const int grid_width;
     static const int grid_height;
     static bool isRunning;
+    static int frame;
 
     // Game();
     // ~Game();

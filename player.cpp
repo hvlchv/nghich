@@ -33,8 +33,8 @@ void Player::update() {
             break;
         }
     }
-    if(Left)vx = -3;
-    else if(Right)vx = 3;
+    if (Left)vx = -6;
+    else if (Right)vx = 6;
     else vx = 0;
     move(vx,vy);
 }

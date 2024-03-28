@@ -15,10 +15,11 @@ const int Game::game_width = 540;
 const int Game::game_height = 810;
 const int Game::grid_width = 30;
 const int Game::grid_height = 30;
+int Game::frame = 0;
 //---------------
 
 SDL_Texture* anh;//background
-Player* bkg, *block;
+Player* bkg;
 std::vector<Object*> blocks;
 Ball* ball;
 
@@ -42,18 +43,16 @@ void Game::init()
     ball = new Ball;
     ball->init("img/ball.png");
     ball->setdest({0,0,15,15});
-    ball->setpos(150,150);
+    ball->setpos(270,500);
 
     bkg = new Player();
-
-    
     bkg->init("img/player1.png");
     bkg->setpos(400,30*24);
 
     std::ifstream tileMap("text/map.txt");
     if(tileMap.is_open())std::cout<<"open map\n";
     int type;
-    for(int x = 0; x<6; x++)
+    for(int x = 0; x<10; x++)
     {
         for(int y = 0; y<6; y++)
         {
@@ -90,6 +89,7 @@ void Game::init()
 
 void Game::input()
 {
+    frame++;
     SDL_PollEvent(&event);
 
     if(event.type == SDL_QUIT)
@@ -117,6 +117,7 @@ void Game::render()
     SDL_SetRenderDrawColor(renderer, 0, 0,0,255);
     SDL_RenderClear(renderer);
     for (int x = 0; x <= game_width; x += 30) {
+
             for (int y = 0; y <= game_height; y += 30) {
                 // Set color to white
                     const auto rect = SDL_Rect{x,y,grid_width,grid_height};
@@ -130,6 +131,7 @@ void Game::render()
                 
 
             }
+    SDL_RenderDrawLine(Game::renderer,game_width+1,0,game_width+1,game_height);
          
                     
     
